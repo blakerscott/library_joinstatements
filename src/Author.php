@@ -25,13 +25,49 @@
         {
             return $this->id;
         }
-        
+
         function save()
         {
             $GLOBALS['DB']->exec("INSERT INTO authors (name)
             VALUES ('{$this->getName()}');
             ");
             $this->id = $GLOBALS['DB']->lastInsertId();
+        }
+
+        static function getAll()
+		{//gets every single book
+			$returned_authors = array();
+			$all_authors = $GLOBALS['DB']->query("SELECT * FROM authors;");
+			foreach ($all_authors as $author) {
+				$id = $author['id'];
+				$name = $author['name'];
+				$new_author = new Author($id, $name);
+                array_push($returned_authors, $new_author);
+			}//make sure you are pushing the object you created,'new_book' and not the object you are pulling from your database, 'book'
+            return $returned_authors;
+		}
+
+        static function deleteAll()
+		{
+			$GLOBALS['DB']->exec("DELETE FROM authors;");
+		}
+
+        function updateName($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE authors SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+        }
+
+        static function find($search_id)
+        {
+            $found_author = null;
+            $all_authors = Author::getAll();
+            foreach($all_authors as $author) {
+                if ($search_id == $author->getId()){
+                    $found_author = $author;
+                }
+            }
+            return $found_author;
         }
 
     }
