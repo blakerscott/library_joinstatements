@@ -70,6 +70,13 @@
             return $found_author;
         }
 
+        function delete()
+		{//delete one course
+			//will update later to delete all students in that course
+			$GLOBALS['DB']->exec("DELETE FROM authors WHERE id = {$this->getId()};");
+			$GLOBALS['DB']->exec("DELETE FROM authors WHERE author_id = {$this->getId()};");
+		}
+
     }
 
 

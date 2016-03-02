@@ -106,6 +106,25 @@
             $this->assertEquals($test_author, $result);
         }
 
+        function testDelete()
+		{//delete one course
+			//Arrange
+            $name = "John Steinbeck";
+            $id = 1;
+            $test_author = new Author($id, $name);
+            $test_author->save();
+
+            $name2 = "Dr. Suess";
+            $id2 = 2;
+            $test_author2 = new Author($id2, $name2);
+            $test_author2->save();
+			//Act
+			$test_author->delete();
+			$result = Author::getAll();
+			//Assert
+			$this->assertEquals([$test_author2], $result);
+		}
+
     }
 
 
