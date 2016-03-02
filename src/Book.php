@@ -74,6 +74,55 @@
 			$GLOBALS['DB']->exec("DELETE FROM books WHERE book_id = {$this->getId()};");
 		}
 
+        function addAuthor($new_author)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO books_authors (author_id, book_id) VALUES ({$new_author->getId()}, {$this->getId()})");
+        }
+
+        function getAuthor()
+        {
+            $returned_authors = $GLOBALS['DB']->query("SELECT authors.* FROM books
+                JOIN books_authors ON (books_authors.book_id = books.id)
+                JOIN authors ON (authors.id = books_authors.author_id)
+                WHERE books.id = {$this->getId()};");
+            $authors = array();
+            foreach($returned_authors as $author) {
+                $name = $author['name'];
+                $id = $author['id'];
+                $new_author = new Author($id, $name);
+                array_push($authors, $new_author);
+            }
+            return $authors;
+        }
+
+
+		// function getTasks()
+	    //      {
+	    //          $returned_tasks = $GLOBALS['DB']->query("SELECT tasks.* FROM categories
+	    //              JOIN categories_tasks ON (categories_tasks.category_id = categories.id)
+	    //              JOIN tasks ON (tasks.id = categories_tasks.task_id)
+	    //              WHERE categories.id = {$this->getId()};");
+	    //          $tasks = array();
+	    //          foreach($returned_tasks as $task) {
+	    //              $description = $task['description'];
+	    //              $id = $task['id'];
+	    //              $new_task = new Task($description, $id);
+	    //              array_push($tasks, $new_task);
+	    //          }
+	    //          return $tasks;
+	    //      }
+
+
+
+
+		// So what's going on inside this JOIN statement? It's happening in a few simple steps: We set our destination: authors.*. This means we want a complete authors table.
+// We set our starting point: books. *We collect an id from the books table (chosen at the end of the statement, after WHERE), and join it up with any matching rows in the books_authors table.
+// We use the author_id from the matching rows in the books_authors table to select rows from the authors table.
+// Finally, our statement returns a complete authors table, as a PDO, composed of only those rows which match our query.
+// This single query takes the place of a potentially huge number of other queries, and returns information in an extremely usable PDO format.
+
+
+
 
 	}
  ?>

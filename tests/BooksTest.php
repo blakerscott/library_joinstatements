@@ -5,6 +5,8 @@
     * @backupStaticAttributes disabled
     */
 	require_once 'src/Book.php';
+    require_once 'src/Author.php';
+
 
     $server = 'mysql:host=localhost;dbname=library_test';
     $username = 'root';
@@ -16,6 +18,7 @@
         protected function tearDown()
 		{
 			Book::deleteAll();
+            Author::deleteAll();
 		}
 
         function testGetTitle()
@@ -160,7 +163,60 @@
 			//Assert
 			$this->assertEquals([$test_book2], $result);
 		}
-        
+
+        function testAddAuthor()
+        {
+            //Arrange
+            $name = "John Steinbeck";
+            $id = 1;
+            $test_author = new Author($id, $name);
+            $test_author->save();
+
+            $title = "Grapes of Wrath";
+            $id2 = 5;
+            $test_book = new Book($id2, $title);
+            $test_book->save();
+
+            //Act
+            $test_book->addAuthor($test_author);
+
+            //Assert
+            $this->assertEquals($test_book->getAuthor(), [$test_author]);
+
+        }
+
+        function testGetAuthor()
+        {
+            //Arrange
+            $name = "John Steinbeck";
+            $id = 1;
+            $test_author = new Author($id, $name);
+            $test_author->save();
+
+            $name2 = "Jane Steinbeck";
+            $id2 = 2;
+            $test_author2 = new Author($id2, $name2);
+            $test_author2->save();
+
+            $title = "Short Stories by Author";
+            $id2 = 5;
+            $test_book = new Book($id2, $title);
+            $test_book->save();
+
+            //Act
+            $test_book->addAuthor($test_author);
+            $test_book->addAuthor($test_author2);
+
+            //Assert
+            $this->assertEquals($test_book->getAuthor(), [$test_author, $test_author2]);
+
+
+        }
+
+///workspace
+
+
+
 
 	}
 ?>
