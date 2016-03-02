@@ -77,7 +77,7 @@
 			$GLOBALS['DB']->exec("DELETE FROM authors WHERE author_id = {$this->getId()};");
 		}
 
-    }
+}
 
 
 
