@@ -1,0 +1,14 @@
+<form class="form-group" action="/admin_add_book" method="post">
+    <h2>Add a book</h2>
+    <label for='title'>Book Title:</label>
+    <input  class="form-control"id='title' name='title' type='text'><br>
+
+    <label for='copies_total'>Copies Total:</label>
+    <input  class="form-control"id='copies_total' name='copies_total' type='text'><br>
+
+    <button class="btn btn-lg btn-primary"type='submit'>Add Book</button>
+</form>
+<form class="form-group" action="/delete_all_books" method="post">
+    <input value="delete" type='hidden' name='_method'>
+    <button class="btn btn-lg btn-warning"type='submit'>WARNING: THIS BUTTON WILL NUKE ALL BOOKS!</button>
+</form>

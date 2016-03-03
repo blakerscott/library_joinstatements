@@ -1,0 +1,23 @@
+<table style='width:100%'>
+    <caption> <h2>Author Archive ( Click an author to edit them )</h2> </caption>
+    <tr>
+        <th>
+            Author
+        </th>
+    </tr>
+    {% if authors is not empty %}
+        {% for author in authors %}
+            <tr>
+                <td>
+                    <a href='/author/{{author.getId}}'>{{ author.getName}}</a>
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td>
+                    No authors available
+            </td>
+        </tr>
+    {% endif %}
+</table>

@@ -1,6 +1,7 @@
 <?php
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Book.php";
+    require_once __DIR__."/../src/Author.php";
 
 
     $server = 'mysql:host=localhost;dbname=library';
@@ -32,7 +33,8 @@
     $app->get("/admin", function() use ($app) {
         //Get all books
         return $app['twig']->render('admin.html.twig', array(
-            'books' => Book::getAll()
+            'books' => Book::getAll(),
+            'authors' => Author::getAll()
         ));
     });
 
@@ -51,7 +53,8 @@
         $book->updateTitle($new_title);
         return $app['twig']->render('admin.html.twig', array(
             'book' => $book,
-            'books' => Book::getAll()
+            'books' => Book::getAll(),
+            'authors' => Author::getAll()
         ));
     });
 
@@ -65,6 +68,7 @@
         $book = new Book($id = null, $title, $copies_total, $copies_available);
         $book->save();
         return $app['twig']->render('admin.html.twig', array(
+            'authors' => Author::getAll(),
             'books' => Book::getAll()
         ));
     });
@@ -73,7 +77,8 @@
 		//Nuke all books
 		Book::deleteAll();
 		return $app['twig']->render('admin.html.twig', array(
-			'books' => Book::getAll(),
+            'authors' => Author::getAll(),
+			'books' => Book::getAll()
 	  ));
 	});
 
@@ -82,9 +87,24 @@
         $book = Book::find($id);
         $book->delete();
 		return $app['twig']->render('admin.html.twig', array(
-			'books' => Book::getAll(),
+            'authors' => Author::getAll(),
+			'books' => Book::getAll()
 	  ));
 	});
+
+    //////Author/////////////
+    ////////////////////////
+
+    $app->post('/admin_add_author', function() use ($app) {
+        //adds an author Yay
+        $name = $_POST['author'];
+        $author = new Author($id = null, $name);
+        $author->save();
+        return $app['twig']->render('admin.html.twig', array(
+            'books' => Book::getAll(),
+            'authors' => Author::getAll()
+        ));
+    });
 
 
     return $app;
