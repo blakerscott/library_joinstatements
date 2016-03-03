@@ -1,0 +1,35 @@
+<table style='width:100%'>
+    <caption> Books Available </caption>
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Copies Total
+        </th>
+        <th>
+            Copies Available
+        </th>
+    </tr>
+    {% if books is not empty %}
+        {% for book in books %}
+            <tr>
+                <td>
+                    {{ book.getTitle }}
+                </td>
+                <td>
+                    {{ book.getCopiesTotal }}
+                </td>
+                <td>
+                    {{ book.getCopiesAvailable }}
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td>
+                    No books available
+            </td>
+        </tr>
+    {% endif %}
+</table>

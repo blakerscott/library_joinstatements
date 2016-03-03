@@ -2,7 +2,7 @@
 
 #### _Short Description of the Project_ _This.Is.TheDate_
 
-### By _**Alex Fallenstedt**_
+### By _**Alex Fallenstedt and Blake Scott**_
 
 ## Description
 
@@ -35,4 +35,4 @@ Javascript? with Chai/Mocha for testing?
 
 _MIT License._
 
-_Copyright (c) 2016_ **Alexander Fallenstedt**
+_Copyright (c) 2016_ **Blake Scott and Alexander Fallenstedt**
