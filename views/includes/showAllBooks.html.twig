@@ -1,5 +1,5 @@
 <table style='width:100%'>
-    <caption> Books Available </caption>
+    <caption> <h2>Book Archive ( Click a title to edit a book )</h2> </caption>
     <tr>
         <th>
             Title
@@ -15,7 +15,7 @@
         {% for book in books %}
             <tr>
                 <td>
-                    {{ book.getTitle }}
+                    <a href='/book/{{book.getId}}'>{{ book.getTitle }}</a>
                 </td>
                 <td>
                     {{ book.getCopiesTotal }}

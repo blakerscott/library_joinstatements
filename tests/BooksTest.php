@@ -146,6 +146,7 @@
 
 			//Act
 			$test_book->updateTitle('Harry Potter');
+
 			//Assert
 			$this->assertEquals('Harry Potter', $test_book->getTitle());
 		}
