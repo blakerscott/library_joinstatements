@@ -41,6 +41,7 @@
     $app->get("/book/{id}", function($id) use ($app) {
         //Navigate to a specific edit/update page
         $book = Book::find($id);
+        var_dump($book->getAuthor());
         return $app['twig']->render('editbook.html.twig', array(
             'authors' => Author::getAll(),
             'book' => $book
@@ -102,6 +103,18 @@
         $author = new Author($id = null, $name);
         $author->save();
         return $app['twig']->render('admin.html.twig', array(
+            'books' => Book::getAll(),
+            'authors' => Author::getAll()
+        ));
+    });
+
+    $app->post('/add_author_to_book', function() use ($app) {
+        //adds author to individual book
+        $author = Author::find($_POST['author_id']);
+        $book = Book::find($_POST['book_id']);
+        $book->addAuthor($author);
+        return $app['twig']->render('admin.html.twig', array(
+            'book' => $book,
             'books' => Book::getAll(),
             'authors' => Author::getAll()
         ));

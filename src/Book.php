@@ -117,14 +117,15 @@
                 JOIN books_authors ON (books_authors.book_id = books.id)
                 JOIN authors ON (authors.id = books_authors.author_id)
                 WHERE books.id = {$this->getId()};");
-            $authors = array();
+				$authors = array();
             foreach($returned_authors as $author) {
                 $name = $author['name'];
                 $id = $author['id'];
                 $new_author = new Author($id, $name);
-                array_push($authors, $new_author);
+                array_push($authors, $new_author->getName());
             }
-            return $authors;
+			$authors_implode = implode(', ', $authors);
+            return $authors_implode;
         }
 
 		// So what's going on inside this JOIN statement? It's happening in a few simple steps: We set our destination: authors.*. This means we want a complete authors table.

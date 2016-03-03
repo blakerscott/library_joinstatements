@@ -5,6 +5,9 @@
             Title
         </th>
         <th>
+            Author(s)
+        </th>
+        <th>
             Copies Total
         </th>
         <th>
@@ -16,6 +19,9 @@
             <tr>
                 <td>
                     <a href='/book/{{book.getId}}'>{{ book.getTitle }}</a>
+                </td>
+                <td>
+                    {{book.getAuthor}}
                 </td>
                 <td>
                     {{ book.getCopiesTotal }}

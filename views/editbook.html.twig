@@ -29,8 +29,10 @@
                     <button class="btn btn-lg btn-warning"type='submit'>Delete this book</button>
                 </form>
             </div>
+
+
             <div class="col-md-6">
-                <form class="form-group" action="" method="post">
+                <form class="form-group" action="/add_author_to_book" method="post">
                     <input id="book_id" name="book_id" type="hidden" value="{{ book.getId }}">
                     <select id='author_id' name='author_id' type='text'>
                         {%for author in authors%}

@@ -204,9 +204,10 @@
 
             //Act
             $test_book->addAuthor($test_author);
+			$result = $test_book->getAuthor();
 
             //Assert
-            $this->assertEquals($test_book->getAuthor(), [$test_author]);
+            $this->assertEquals('JK Rowling', $result);
 
         }
 
@@ -233,9 +234,10 @@
             //Act
             $test_book->addAuthor($test_author);
             $test_book->addAuthor($test_author2);
+			$result = $test_book->getAuthor();
 
             //Assert
-            $this->assertEquals($test_book->getAuthor(), [$test_author, $test_author2]);
+            $this->assertEquals('JK Rowling, JK Rowlings Ghost Writer', $result);
 
 
         }
