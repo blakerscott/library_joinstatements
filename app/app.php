@@ -42,6 +42,7 @@
         //Navigate to a specific edit/update page
         $book = Book::find($id);
         return $app['twig']->render('editbook.html.twig', array(
+            'authors' => Author::getAll(),
             'book' => $book
         ));
     });
