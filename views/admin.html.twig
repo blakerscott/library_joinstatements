@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include '/includes/head.html.twig' %}
+  </head>
+  <body>
+    <div class="container">
+      <h1>Cool Cats Library</h1>
+      <h3><em>Welcome to the cool cats administration page :)</em></h3>
+
+        <div class="row">
+                <div class="col-md-6">
+                    <form class="form-group" action="/admin/book" method="post">
+                    <h2>Add a book</h2>
+                    <label for='title'>Book Title:</label>
+                    <input  class="form-control"id='title' name='title' type='text'><br>
+                <button class="btn btn-lg btn-primary"type='submit'>Add Book</button>
+            </form>
+            </div>
+            <div class="col-md-6">
+            <form class="form-group" action="/admin/author" method="post">
+                    <h2>Add an Author</h2>
+                    <label for='author'>Add Author Name (Last Name First Name):</label>
+                    <input class="form-control" id='author' name='author' type='text'><br>
+                    <button class="btn btn-lg btn-primary"type='submit'>Add Author</button>
+            </form>
+        </div>
+        </div><!--row-->
+
+
+        <div>
+            <p>
+                <h1><a href="/">Home</a></h1>
+            </p>
+        </div>
+    </div><!--container-->
+  </body>
+</html>
+
+<!--workspace-->
