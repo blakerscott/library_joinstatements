@@ -120,6 +120,14 @@
         ));
     });
 
+    $app->delete('/delete_all_authors', function() use ($app) {
+		//Nuke all authors
+		Author::deleteAll();
+		return $app['twig']->render('admin.html.twig', array(
+            'authors' => Author::getAll(),
+			'books' => Book::getAll()
+	  ));
+	});
 
     return $app;
 ?>
