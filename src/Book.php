@@ -4,31 +4,61 @@
 	{
 		private $id;
 		private $title;
+		private $copies_total;
+		private $copies_available;
 
-		function __construct($id = null, $title)
+
+		function __construct($id = null, $title, $copies_total, $copies_available)
         {
 			$this->id = $id;
             $this->title = $title;
+			$this->copies_total = $copies_total;
+			$this->copies_available = $copies_available;
 
         }
+
 		function setTitle($new_title)
         {
             $this->title = (string) $new_title;
         }
-        function getTitle()
+
+		function getTitle()
         {
             return $this->title;
         }
+
 		function getId()
         {
             return $this->id;
         }
 
+		function getCopiesTotal()
+		{
+			return $this->copies_total;
+		}
+
+		function setCopiesTotal($new_copies_total)
+        {
+            $this->copies_total = $new_copies_total;
+        }
+
+		function getCopiesAvailable()
+		{
+			return $this->copies_available;
+		}
+
+		function setCopiesAvailable($new_copies_available)
+        {
+            $this->copies_available = $new_copies_available;
+        }
+
 		function save()
 		{
-			$GLOBALS['DB']->exec("INSERT INTO books (title)
-            VALUES ('{$this->getTitle()}');
-            ");
+			$GLOBALS['DB']->exec("INSERT INTO books (title, copies_total, copies_available)
+            VALUES
+			('{$this->getTitle()}',
+			{$this->getCopiesTotal()},
+			{$this->getCopiesAvailable()});");
 			$this->id = $GLOBALS['DB']->lastInsertId();
 		}
 
@@ -39,7 +69,9 @@
 			foreach ($all_books as $book) {
 				$id = $book['id'];
 				$title = $book['title'];
-				$new_book = new Book($id, $title);
+				$copies_total = $book['copies_total'];
+				$copies_available = $book['copies_available'];
+				$new_book = new Book($id, $title, $copies_total, $copies_available);
                 array_push($returned_books, $new_book);
 			}//make sure you are pushing the object you created,'new_book' and not the object you are pulling from your database, 'book'
             return $returned_books;
@@ -94,26 +126,6 @@
             }
             return $authors;
         }
-
-
-		// function getTasks()
-	    //      {
-	    //          $returned_tasks = $GLOBALS['DB']->query("SELECT tasks.* FROM categories
-	    //              JOIN categories_tasks ON (categories_tasks.category_id = categories.id)
-	    //              JOIN tasks ON (tasks.id = categories_tasks.task_id)
-	    //              WHERE categories.id = {$this->getId()};");
-	    //          $tasks = array();
-	    //          foreach($returned_tasks as $task) {
-	    //              $description = $task['description'];
-	    //              $id = $task['id'];
-	    //              $new_task = new Task($description, $id);
-	    //              array_push($tasks, $new_task);
-	    //          }
-	    //          return $tasks;
-	    //      }
-
-
-
 
 		// So what's going on inside this JOIN statement? It's happening in a few simple steps: We set our destination: authors.*. This means we want a complete authors table.
 // We set our starting point: books. *We collect an id from the books table (chosen at the end of the statement, after WHERE), and join it up with any matching rows in the books_authors table.

@@ -25,7 +25,9 @@
         {
             //Arrange
             $title = "Harry Potter";
-            $test_book = new Book($id = null, $title);
+            $copies_total = 10;
+            $copies_available = 2;
+            $test_book = new Book($id = null, $title, $copies_total, $copies_available);
             //Act
             $result = $test_book->getTitle();
             //Assert
@@ -35,8 +37,11 @@
 		function testSetTitle()
 		{
 
+            //Arrange
             $title = "Harry Potter";
-            $test_book = new Book($id = null, $title);
+            $copies_total = 10;
+            $copies_available = 2;
+            $test_book = new Book($id = null, $title, $copies_total, $copies_available);
 
             //Act
             $test_book->setTitle("Harry Potter III");
@@ -49,9 +54,11 @@
 		function testGetId()
 		{
             //Arrange
-            $title = "Harry Potter";
             $id = 1;
-            $test_book = new Book($id, $title);
+            $title = "Harry Potter";
+            $copies_total = 10;
+            $copies_available = 2;
+            $test_book = new Book($id, $title, $copies_total, $copies_available);
 
             //Act
             $result = $test_book->getId();
@@ -63,18 +70,24 @@
 
 		function testSave()
 		{
-			//Arrange
+            //Arrange
             $title = "Harry Potter";
-            $id = null;
-            $test_book = new Book($id, $title);
-			$test_book->save();
+            $copies_total = 10;
+            $copies_available = 2;
+            $test_book = new Book($id = null, $title, $copies_total, $copies_available);
+            $test_book->save();
 
+            $title2 = "Harry P";
+            $copies_total2 = 3;
+            $copies_available2 = 2;
+            $test_book2 = new Book($id = null, $title2, $copies_total2, $copies_available2);
+            $test_book2->save();
 
-			//Act
+            //Act
 			$result = Book::getAll();
 
 			//Assert
-			$this->assertEquals([$test_book], $result);
+			$this->assertEquals([$test_book, $test_book2], $result);
 		}
 
 		function testGetAll()
@@ -82,13 +95,15 @@
 
             //Arrange
             $title = "Harry Potter";
-            $id = 1;
-            $test_book = new Book($id, $title);
-			$test_book->save();
+            $copies_total = 10;
+            $copies_available = 2;
+            $test_book = new Book($id = null, $title, $copies_total, $copies_available);
+            $test_book->save();
 
-            $title2 = "Tortilla Flat";
-            $id2 = 2;
-            $test_book2 = new Book($id2, $title2);
+            $title2 = "Harry P";
+            $copies_total2 = 3;
+            $copies_available2 = 2;
+            $test_book2 = new Book($id = null, $title2, $copies_total2, $copies_available2);
             $test_book2->save();
 
 			//Act
@@ -102,12 +117,15 @@
 		{
 			//Arrange
             $title = "Harry Potter";
-            $id = null;
-            $test_book = new Book($id, $title);
-			$test_book->save();
+            $copies_total = 10;
+            $copies_available = 2;
+            $test_book = new Book($id = null, $title, $copies_total, $copies_available);
+            $test_book->save();
 
-            $title2= "Tortilla Flat";
-            $test_book2 = new Book($id, $title2);
+            $title2 = "Harry P";
+            $copies_total2 = 3;
+            $copies_available2 = 2;
+            $test_book2 = new Book($id = null, $title2, $copies_total2, $copies_available2);
             $test_book2->save();
 
 			//Act
@@ -120,10 +138,11 @@
 		function testUpdateTitle()
 		{
 			//Arrange
-            $title = "Harry Pooper";
-            $id = null;
-            $test_book = new Book($id, $title);
-			$test_book->save();
+            $title = "Harry Popper";
+            $copies_total = 10;
+            $copies_available = 2;
+            $test_book = new Book($id = null, $title, $copies_total, $copies_available);
+            $test_book->save();
 
 			//Act
 			$test_book->updateTitle('Harry Potter');
@@ -135,9 +154,10 @@
 		{
 			//Arrange
             $title = "Harry Potter";
-            $id = null;
-            $test_book = new Book($id, $title);
-			$test_book->save();
+            $copies_total = 10;
+            $copies_available = 2;
+            $test_book = new Book($id = null, $title, $copies_total, $copies_available);
+            $test_book->save();
 
 			//Act
 			$result = Book::find($test_book->getId());
@@ -149,13 +169,15 @@
 		{//delete one course
 			//Arrange
             $title = "Harry Potter";
-            $id = 1;
-            $test_book = new Book($id, $title);
-			$test_book->save();
+            $copies_total = 10;
+            $copies_available = 2;
+            $test_book = new Book($id = null, $title, $copies_total, $copies_available);
+            $test_book->save();
 
-            $title2= "Tortilla Flat";
-            $id2 = 2;
-            $test_book2 = new Book($id2, $title2);
+            $title2 = "Harry P";
+            $copies_total2 = 3;
+            $copies_available2 = 2;
+            $test_book2 = new Book($id = null, $title2, $copies_total2, $copies_available2);
             $test_book2->save();
 			//Act
 			$test_book->delete();
@@ -167,14 +189,16 @@
         function testAddAuthor()
         {
             //Arrange
-            $name = "John Steinbeck";
+            $name = "JK Rowling";
             $id = 1;
             $test_author = new Author($id, $name);
             $test_author->save();
 
-            $title = "Grapes of Wrath";
-            $id2 = 5;
-            $test_book = new Book($id2, $title);
+            $title = "Harry Potter";
+            $copies_total = 10;
+            $copies_available = 2;
+            $id2 = 2;
+            $test_book = new Book($id2, $title, $copies_total, $copies_available);
             $test_book->save();
 
             //Act
@@ -188,19 +212,21 @@
         function testGetAuthor()
         {
             //Arrange
-            $name = "John Steinbeck";
+            $name = "JK Rowling";
             $id = 1;
             $test_author = new Author($id, $name);
             $test_author->save();
 
-            $name2 = "Jane Steinbeck";
+            $name2 = "JK Rowlings Ghost Writer";
             $id2 = 2;
             $test_author2 = new Author($id2, $name2);
             $test_author2->save();
 
-            $title = "Short Stories by Author";
-            $id2 = 5;
-            $test_book = new Book($id2, $title);
+            $title = "Harry Potter";
+            $copies_total = 10;
+            $copies_available = 2;
+            $id3 = 2;
+            $test_book = new Book($id3, $title, $copies_total, $copies_available);
             $test_book->save();
 
             //Act
