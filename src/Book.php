@@ -100,7 +100,7 @@
 		}
 
 		function delete()
-		{//delete one course
+		{//delete one book
 			//will update later to delete all students in that course
 			$GLOBALS['DB']->exec("DELETE FROM books WHERE id = {$this->getId()};");
 			$GLOBALS['DB']->exec("DELETE FROM books WHERE book_id = {$this->getId()};");

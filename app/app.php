@@ -77,6 +77,15 @@
 	  ));
 	});
 
+    $app->delete('/delete_this_book/{id}', function($id) use ($app) {
+		//Delete a single book
+        $book = Book::find($id);
+        $book->delete();
+		return $app['twig']->render('admin.html.twig', array(
+			'books' => Book::getAll(),
+	  ));
+	});
+
 
     return $app;
 ?>

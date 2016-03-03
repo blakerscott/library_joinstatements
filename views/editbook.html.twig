@@ -24,7 +24,7 @@
                 </form>
 
 
-                <form class="form-group" action="/delete_this_book" method="post">
+                <form class="form-group" action="/delete_this_book/{{book.getId}}" method="post">
                     <input value="delete" type='hidden' name='_method'>
                     <button class="btn btn-lg btn-warning"type='submit'>Delete this book</button>
                 </form>
